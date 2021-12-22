@@ -1,21 +1,76 @@
 Option Explicit
 
-Sub test()
+Sub totaling()
 
-Dim pass As String
-pass = "D:\15　消防庁・内閣府からの照会\Ｒ３年度\消防庁より\211224〆防災拠点となる公共施設等の耐震化推進状況調査等について\03庁内各課から回収\"
+Dim ws As String
+Dim path As String
+Dim cellnum As String
+Dim sht As String
+Dim frstbk As String
+Dim lstbk As String
+Dim bk As String
+Dim formula As String
+Dim res_name As String
+Dim formulas() As String
 
-Dim bookname As String
-Dim sheetname As String
+ 
+path = Worksheets("変数").Range("C2")
+cellnum = Worksheets("変数").Range("C3")
+sht = Worksheets("変数").Range("C4")
+frstbk = Worksheets("変数").Range("C5")
+lstbk = Worksheets("変数").Range("C6")
+res_name = ""
+bk = ""
+formula = ""
 
-bookname = "07+（今治市）【様式1／様式2／様式3-1／様式3-2／様式3-3】公共施設等耐震化（都道府県／市町村)+.xlsx"
-sheetname = "様式２（都道府県）"
 
-'Worksheets(2).Range("E9").Value = "=Sum(1 + 2)"
+'回答元テーブルの行数を確認
 
-MsgBox "='" & pass & "[" & bookname & "]!" & sheetname & "!'Range('E9')"
+Dim i As Long
+Dim lstrow As Long
 
-'Worksheets(2).Range("E9").Value = "='" & pass & "[" & bookname & "]" & sheetname & "'!Range(E9)"
-Worksheets(2).Range("E9").Value = "='" & pass & "[" & bookname & "]" & sheetname & "'!E9"
+lstrow = Worksheets("回答元").Cells(Rows.Count, 2).End(xlUp).Row
+
+
+'すべての回答のパスを配列に格納する
+
+ReDim formulas(lstrow - 2)
+
+For i = 2 To lstrow
+    res_name = Worksheets("回答元").Cells(i, 2).Value
+    bk = frstbk & res_name & lstbk
+    formula = "'" & path & "[" & bk & "]" & sht & "'!" & cellnum
+    
+    formulas(i - 2) = formula
+Next i
+
+Dim ress As Long
+ress = i - 3
+
+Call make_sum_formula(formulas, ress, cellnum)
 
 End Sub
+
+Sub make_sum_formula(formulas, ress, cellnum)
+
+Dim sum_formula As String
+Dim j As Long
+
+sum_formula = "=SUM(" & vbLf
+
+For j = 0 To ress
+    sum_formula = sum_formula & formulas(j)
+    If ress > j Then
+        sum_formula = sum_formula & "," & vbLf
+    End If
+Next j
+
+sum_formula = sum_formula & vbLf & ")"
+
+MsgBox sum_formula
+
+Worksheets(1).Range(cellnum) = sum_formula
+
+End Sub
+
+
