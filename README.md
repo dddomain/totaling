@@ -13,6 +13,6 @@ https://docs.microsoft.com/ja-jp/office/vba/language/reference/user-interface-he
 
 ### コメントオブジェクト
 公式リファレンス
-https://docs.microsoft.com/ja-jp/office/vba/api/excel.comment
+https://docs.microsoft.com/ja-jp/office/vba/api/excel.comment<br>
 記事
 https://daitaideit.com/vba-addcomment-clearcomments/
