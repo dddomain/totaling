@@ -48,10 +48,11 @@ Dim ress As Long
 ress = i - 3
 
 Call make_sum_formula(formulas, ress, cellnum)
+Call copy_formula
 
 End Sub
 
-Sub make_sum_formula(formulas, ress, cellnum)
+Private Sub make_sum_formula(formulas, ress, cellnum)
 
 Dim sum_formula As String
 Dim j As Long
@@ -73,4 +74,13 @@ Worksheets(1).Range(cellnum) = sum_formula
 
 End Sub
 
+Private Sub copy_formula()
+
+    Dim totaling_cells As String
+    totaling_cells = "A2, B1:B2"
+
+    Range("A1").copy
+    Range(totaling_cells).PasteSpecial xlPasteValues
+
+End Sub
 
