@@ -7,5 +7,12 @@ Excelブックの調査様式を用いて回答を回収する際に使用する
 
 ## 参考
 
-Copy メソッド
+### Copy メソッド
+公式リファレンス
 https://docs.microsoft.com/ja-jp/office/vba/language/reference/user-interface-help/copy-method-visual-basic-for-applications
+
+### コメントオブジェクト
+公式リファレンス
+https://docs.microsoft.com/ja-jp/office/vba/api/excel.comment
+記事
+https://daitaideit.com/vba-addcomment-clearcomments/
