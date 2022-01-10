@@ -1,13 +1,12 @@
 Option Explicit
 
 Sub totaling()
-
-Dim ws As String
-Dim path As String: path = Worksheets("変数").Range("C2")
-Dim cellnum As String: cellnum = Worksheets("変数").Range("C3")
-Dim sht As String: sht = Worksheets("変数").Range("C4")
-Dim frstbk As String: frstbk = Worksheets("変数").Range("C5")
-Dim lstbk As String: lstbk = Worksheets("変数").Range("C6")
+Dim varWs As Worksheet: Set varWs = Worksheets("変数（とりまとめ）")
+Dim path As String: path = varWs.Range("C2")
+Dim cellnum As String: cellnum = varWs.Range("C3")
+Dim sht As String: sht = varWs.Range("C4")
+Dim frstbk As String: frstbk = varWs.Range("C5")
+Dim lstbk As String: lstbk = varWs.Range("C6")
 Dim bk As String
 Dim formula As String
 Dim res_name As String
@@ -18,12 +17,12 @@ Dim formulas() As String
 Dim i As Long
 Dim lstrow As Long
 
-lstrow = Worksheets("回答元").Cells(Rows.Count, 2).End(xlUp).Row
+lstrow = Worksheets("回答元（とりまとめ）").Cells(Rows.Count, 2).End(xlUp).Row
 
 'すべての回答のパスを配列に格納する
 ReDim formulas(lstrow - 2)
 For i = 2 To lstrow
-    res_name = Worksheets("回答元").Cells(i, 2).Value
+    res_name = Worksheets("回答元（とりまとめ）").Cells(i, 2).Value
     bk = frstbk & res_name & lstbk
     formula = "'" & path & "[" & bk & "]" & sht & "'!" & cellnum
     formulas(i - 2) = formula
