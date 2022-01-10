@@ -3,10 +3,9 @@ Option Explicit
 Function makeSumFormula(linkColl, frstExecCell) As String
 
     Dim sumformula As String
-    Dim j As Long
-    
     sumformula = "=SUM(" & vbLf
-    
+
+    Dim j As Long
     For j = 1 To linkColl.Count
         sumformula = sumformula & linkColl(j)
         If linkColl.Count > j Then
@@ -18,3 +17,4 @@ Function makeSumFormula(linkColl, frstExecCell) As String
     makeSumFormula = sumformula
 
 End Function
+
