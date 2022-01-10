@@ -12,8 +12,9 @@ Function makeSumFormula(linkColl, frstExecCell) As String
             sumformula = sumformula & "," & vbLf
         End If
     Next j
-    
     sumformula = sumformula & vbLf & ")"
+
+    'return
     makeSumFormula = sumformula
 
 End Function
