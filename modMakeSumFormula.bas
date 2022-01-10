@@ -1,20 +1,20 @@
 Option Explicit
 
-Public Sub makeSumFormula(execWs, formulas, ress, frstExecCell)
+Function makeSumFormula(linkColl, frstExecCell) As String
 
-    Dim sumFormula As String
+    Dim sumformula As String
     Dim j As Long
-
-    sumFormula = "=SUM(" & vbLf
-
-    For j = 0 To ress
-        sumFormula = sumFormula & formulas(j)
-        If ress > j Then
-            sumFormula = sumFormula & "," & vbLf
+    
+    sumformula = "=SUM(" & vbLf
+    
+    For j = 1 To linkColl.Count
+        sumformula = sumformula & linkColl(j)
+        If linkColl.Count > j Then
+            sumformula = sumformula & "," & vbLf
         End If
     Next j
+    
+    sumformula = sumformula & vbLf & ")"
+    makeSumFormula = sumformula
 
-    sumFormula = sumFormula & vbLf & ")"
-    execWs.Range(frstExecCell) = sumFormula
-
-End Sub
+End Function
