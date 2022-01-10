@@ -3,24 +3,15 @@ Option Explicit
 Sub totaling()
 
 Dim ws As String
-Dim path As String
-Dim cellnum As String
-Dim sht As String
-Dim frstbk As String
-Dim lstbk As String
+Dim path As String: path = Worksheets("変数").Range("C2")
+Dim cellnum As String: cellnum = Worksheets("変数").Range("C3")
+Dim sht As String: sht = Worksheets("変数").Range("C4")
+Dim frstbk As String: frstbk = Worksheets("変数").Range("C5")
+Dim lstbk As String: lstbk = Worksheets("変数").Range("C6")
 Dim bk As String
 Dim formula As String
 Dim res_name As String
 Dim formulas() As String
-
-path = Worksheets("変数").Range("C2")
-cellnum = Worksheets("変数").Range("C3")
-sht = Worksheets("変数").Range("C4")
-frstbk = Worksheets("変数").Range("C5")
-lstbk = Worksheets("変数").Range("C6")
-res_name = ""
-bk = ""
-formula = ""
 
 '回答元テーブルの行数を確認
 
