@@ -17,4 +17,3 @@ Function makeSumFormula(linkColl, frstExecCell) As String
     makeSumFormula = sumformula
 
 End Function
-
