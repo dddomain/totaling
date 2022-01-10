@@ -11,6 +11,12 @@ Sub Totaling()
     
     Dim frstExecCell As String: frstExecCell = varsWs.Range("C3")
     
+    '和算式の再代入を行わない場合
+    Dim rc As VbMsgBoxResult
+    rc = MsgBox(frstExecCell & "に和算式を新規作成しますか？", vbYesNo + vbQuestion)
+    If rc = vbNo Then
+        GoTo NoMakeSumFormula
+    End If
     
     Dim linkColl As Collection: Set linkColl = New Collection
     Set linkColl = makeLinkColl(varsWs, ressWs, frstExecCell)
@@ -19,9 +25,11 @@ Sub Totaling()
     sumformula = makeSumFormula(linkColl, frstExecCell)
     
     execWs.Range(frstExecCell) = sumformula
-    
-    Dim rc As VbMsgBoxResult
-    rc = MsgBox(frstExecCell & "で作成した式を全てのセルに代入しますか？", vbYesNo + vbQuestion)
+
+'和算式を再作成しない場合はここまでジャンプする
+NoMakeSumFormula:
+
+    rc = MsgBox(frstExecCell & "の式を全てのセルに代入しますか？", vbYesNo + vbQuestion)
     If rc = vbYes Then
         Call Spread(rngsWs, frstExecCell)
     End If
