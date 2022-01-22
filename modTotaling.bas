@@ -6,10 +6,12 @@ Sub Totaling()
     '各シートが存在するかをチェックしつつ代入する（=とりまとめシート上で実行しているかの確認）
     On Error GoTo ErrorHandler
     Dim varsWs As Worksheet: Set varsWs = Worksheets("変数（" & execWs.Name & "）")
-    Dim ressWs As Worksheet: Set ressWs = Worksheets("回答元（" & execWs.Name & "）")
-    Dim rngsWs As Worksheet: Set rngsWs = Worksheets("セル範囲（" & execWs.Name & "）")
+
+    Dim paramsTbl As Variant: Set paramsTbl = varsWs.ListObjects("params")
+    Dim execRngsTbl As Variant: Set execRngsTbl = varsWs.ListObjects("execRngs")
+    Dim ressTbl As Variant: Set ressTbl = varsWs.ListObjects("ress")
     
-    Dim frstExecCell As String: frstExecCell = varsWs.Range("C3")
+    Dim frstExecCell As String: frstExecCell = paramsTbl.Range(3, 2)
     
     '和算式の再代入を行わない場合
     Dim rc As VbMsgBoxResult
@@ -19,7 +21,7 @@ Sub Totaling()
     End If
     
     Dim linkColl As Collection
-    Set linkColl = makeLinkColl(varsWs, ressWs, frstExecCell)
+    Set linkColl = makeLinkColl(paramsTbl, ressTbl, frstExecCell)
     
     Dim sumformula As String
     sumformula = makeSumFormula(linkColl, frstExecCell)
@@ -30,7 +32,7 @@ NoMakeSumFormula:
 
     rc = MsgBox(frstExecCell & "の式を全てのセルに代入しますか？", vbYesNo + vbQuestion)
     If rc = vbYes Then
-        Call Spread(rngsWs, frstExecCell)
+        Call Spread(execRngsTbl, frstExecCell)
     End If
     
     '例外処理の前に脱出する
