@@ -18,7 +18,7 @@ Sub Totaling()
         GoTo NoMakeSumFormula
     End If
     
-    Dim linkColl As Collection: Set linkColl = New Collection
+    Dim linkColl As Collection
     Set linkColl = makeLinkColl(varsWs, ressWs, frstExecCell)
     
     Dim sumformula As String
@@ -26,7 +26,6 @@ Sub Totaling()
     
     execWs.Range(frstExecCell) = sumformula
 
-'和算式を再作成しない場合はここまでジャンプする
 NoMakeSumFormula:
 
     rc = MsgBox(frstExecCell & "の式を全てのセルに代入しますか？", vbYesNo + vbQuestion)
